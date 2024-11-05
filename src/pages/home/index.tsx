@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Card from "../../components/card";
 import { Product } from "../../models/product";
 import './styles.css'
+import ProductDetail from "../../components/product-detail";
 
 const apiUrl = 'https://api.escuelajs.co/api/v1/products';
 const defaultImg = 'https://images.pexels.com/photos/28216688/pexels-photo-28216688/free-photo-of-acampada-de-otono.png';
@@ -43,15 +44,18 @@ function Home() {
     if (products.length === 0) return <p>No hay productos para mostrar.</p>;
 
     return (
-      <div className="grid gap-6 article w-full">
-        {
-          products?.map((product) => (
-            <Card
-              key={product.id}
-              {...product}/>
-          ))
-        }
-      </div>
+      <>
+        <div className="grid gap-8 article w-full sm:px-8">
+          {
+            products?.map((product) => (
+              <Card
+                key={product.id}
+                {...product}/>
+              ))
+            }
+        </div>
+        <ProductDetail />
+      </>
     )
   }
   

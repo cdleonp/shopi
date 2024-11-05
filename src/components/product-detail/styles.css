@@ -1,0 +1,9 @@
+.showDetail {
+    right: 0;
+    transition: right 0.5s;
+}
+
+.hideDetail {
+    right: -360px;
+    transition: right 0.5s;
+}

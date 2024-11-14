@@ -1,9 +1,9 @@
-.showDetail {
+.show-side-menu {
     right: 0;
     transition: right 0.5s;
 }
 
-.hideDetail {
+.hide-side-menu {
     right: -360px;
     transition: right 0.5s;
 }

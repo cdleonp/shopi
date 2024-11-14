@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Card from "../../components/card";
+import SideMenu from "../../components/side-menu";
 import { Product } from "../../models/product";
 import './styles.css'
-import ProductDetail from "../../components/product-detail";
 
 const apiUrl = 'https://api.escuelajs.co/api/v1/products';
 const defaultImg = 'https://images.pexels.com/photos/28216688/pexels-photo-28216688/free-photo-of-acampada-de-otono.png';
@@ -54,7 +54,7 @@ function Home() {
               ))
             }
         </div>
-        <ProductDetail />
+        <SideMenu />
       </>
     )
   }

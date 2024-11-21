@@ -5,18 +5,23 @@ import { SideMenuTitleMapper } from "../../shared/constants";
 
 function Card(data: Product) {
 	const globalContext = useContext(GlobalContext);
+	const showProductDetail = (data: Product, title: SideMenuTitleMapper) => {
+		globalContext?.setProductDetail(data, title);
+		globalContext?.setIsSideMenuOpen(true);
+	}
 	const isAlreadyInCart = globalContext?.cartItems.find((item) => item.id === data.id);
-	const addItemToCar = (product: Product, contentType: SideMenuTitleMapper) => {
+	const AddItemAndShowCart = (product: Product, contentType: SideMenuTitleMapper) => {
 		if(!isAlreadyInCart) {
 			globalContext?.addCartItem({ ...product, quantity: 1 }, contentType);
 		}
+		globalContext?.setIsSideMenuOpen(true);
 	}
 
 	return (
 		<article className="relative w-full h-72">
 			<button
 					className="absolute flex justify-center items-center top-0 right-0 rounded-full w-7 h-7 bg-white m-3 z-[1]"
-					onClick={() => addItemToCar(data, SideMenuTitleMapper.CartItem)}>
+					onClick={() => AddItemAndShowCart(data, SideMenuTitleMapper.CartItem)}>
 					{
 						isAlreadyInCart
 						? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-8 text-green-700">
@@ -29,7 +34,7 @@ function Card(data: Product) {
 				</button>
 			<div
 				className="group block h-full cursor-pointer"
-				onClick={() => globalContext?.showProductDetail(data, SideMenuTitleMapper.ProductDetail)}
+				onClick={() => showProductDetail(data, SideMenuTitleMapper.ProductDetail)}
 			>
 				<figure className="relative h-5/6 overflow-hidden rounded-lg bg-gray-200">
 					<img className="w-full h-full object-cover" src={ data?.images[0]} alt={data?.title}/>

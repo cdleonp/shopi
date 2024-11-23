@@ -37,8 +37,8 @@ function Card(data: Product) {
 				onClick={() => showProductDetail(data, SideMenuTitleMapper.ProductDetail)}
 			>
 				<figure className="relative h-5/6 overflow-hidden rounded-lg bg-gray-200">
-					<img className="w-full h-full object-cover" src={ data?.images[0]} alt={data?.title}/>
-					<h3 className="absolute left-1 bottom-1 inline-block -mt-32 z-10 text-sm font-bold bg-gray-100 py-1 px-3 rounded-lg">{ data?.category.name }</h3>
+					<img className="w-full h-full object-cover" src={ data?.image} alt={data?.title}/>
+					<h3 className="absolute left-1 bottom-1 inline-block -mt-32 z-10 text-sm font-bold bg-gray-100 py-1 px-3 rounded-lg">{ data?.category }</h3>
 				</figure>				
 				<footer className="flex justify-between mt-1">
 					<h3 className="text-sm text-gray-700">{ data?.title }</h3>

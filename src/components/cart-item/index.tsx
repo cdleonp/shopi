@@ -4,7 +4,7 @@ import { Cart } from "../../models/cart";
 import { SideMenuTitleMapper } from "../../shared/constants";
 import ProductQuantity from "../product-quantity";
 
-function CartItem({id, title, price, images, quantity}: Cart) {
+function CartItem({id, title, price, image, quantity}: Cart) {
     const globalContext = useContext(GlobalContext);
 
     return (        
@@ -23,7 +23,7 @@ function CartItem({id, title, price, images, quantity}: Cart) {
                     </button>
                 }
                 <div className="flex items-center justify-between">
-                    <img className="h-20 w-20" src={ images[0] } alt={ title } />     
+                    <img className="h-20 w-20" src={ image } alt={ title } />     
                     <div className="flex flex-1 items-stretch justify-between">
                         <p className="flex-1 px-2 text-base font-medium text-gray-900 dark:text-white">{ title }</p>                
                         <p className="text-end text-base font-bold text-gray-900 dark:text-white">${ price }</p>

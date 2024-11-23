@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Navbar from "../navbar";
+import NavBar from "../navbar";
 
 interface LayoutProps {
     children: ReactNode;
@@ -8,7 +8,7 @@ interface LayoutProps {
 function Layout({children}: LayoutProps) {
     return (
         <div className="flex flex-col items-center">
-            <Navbar />
+            <NavBar />
             {children}
         </div>
     )

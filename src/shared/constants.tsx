@@ -17,5 +17,6 @@ export enum SideMenuTitleMapper {
     None = "",
 }
 
-
+export const apiUrl = 'https://fakestoreapi.com';
+export const defaultImg = 'https://images.pexels.com/photos/28216688/pexels-photo-28216688/free-photo-of-acampada-de-otono.png';
   

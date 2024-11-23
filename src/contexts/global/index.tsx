@@ -24,6 +24,8 @@ type GlobalContextTypes = {
 const GlobalContext = createContext<GlobalContextTypes | null>(null);
 
 function GlobalProvider({children}: ReactTypes) {
+    
+    // Set content type
     const [contentType, setContentType] = useState<SideMenuTitleMapper>(SideMenuTitleMapper.None);
 
     // Open/Close side menu

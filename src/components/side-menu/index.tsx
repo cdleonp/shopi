@@ -56,10 +56,10 @@ function SideMenu() {
             }
             {
                 globalContext?.contentType === SideMenuTitleMapper.CartItem &&
-                globalContext?.cartItems.length > 0 ?
+                globalContext?.cartItems.length > 0 &&
                 <footer className="sticky bottom-0 pt-2 pb-5 mt-4 bg-white">
                     <h3 className="text-lg font-semibold text-right">Total: ${getTotalPrice()}</h3>
-                    <Link to='orders/last'>
+                    <Link to='/orders/last'>
                         <button
                             className="w-full bg-black text-white rounded-lg font-semibold p-3 mt-3"
                             onClick={() => checkoutHandler()}
@@ -68,9 +68,12 @@ function SideMenu() {
                         </button>
                     </Link>
                 </footer> 
-                :
+            } 
+            {
+                globalContext?.contentType === SideMenuTitleMapper.CartItem &&
+                globalContext?.cartItems.length === 0 &&
                 <p className="text-center text-gray-600 mt-12">No hay productos en el carrito.</p>   // Mostrar mensaje cuando el carrito está vacío
-            }                           
+            }
         </aside>
     )
 }

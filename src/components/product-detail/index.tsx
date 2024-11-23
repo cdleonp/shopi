@@ -6,8 +6,8 @@ function ProductDetail(product: Product) {
         <article>
             <section className="w-full h-72">
                 <figure className="relative h-full overflow-hidden rounded-lg bg-gray-200">
-                    <img className="w-full h-full object-cover" src={ product.images[0] } alt={ product.title }/>
-                    <h3 className="absolute left-1 bottom-1 inline-block -mt-32 z-10 text-sm font-bold bg-gray-100 py-1 px-3 rounded-lg">{ product.category.name }</h3>
+                    <img className="w-full h-full object-cover" src={ product.image } alt={ product.title }/>
+                    <h3 className="absolute left-1 bottom-1 inline-block -mt-32 z-10 text-sm font-bold bg-gray-100 py-1 px-3 rounded-lg">{ product.category }</h3>
                 </figure>				
             </section>
             <footer className="flex flex-col mt-1">

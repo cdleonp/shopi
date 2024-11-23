@@ -1,7 +1,9 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { GlobalContext } from "../../contexts/global";
-import { SideMenuTitleMapper } from "../../shared/constants";
+// import { Category } from "../../models/category";
+import { apiUrl, SideMenuTitleMapper } from "../../shared/constants";
+import './styles.css'
 
 /**
  * This component renders the navigation bar with the provided links.
@@ -9,8 +11,9 @@ import { SideMenuTitleMapper } from "../../shared/constants";
  * @returns The HTML for the navigation bar.
  */
 
-function Navbar() {
+function NavBar() {
     const globalContext = useContext(GlobalContext);
+    const [categories, setCategories] = useState<string[]>([]);
     const activeRouteStyle = 'underline underline-offset-3';
     const showCart = (title: SideMenuTitleMapper) => {
         globalContext?.setContentType(title);
@@ -18,6 +21,23 @@ function Navbar() {
     }
     const totalCartItems = () => globalContext?.cartItems.reduce((total, item) => total + item.quantity, 0);
 
+    useEffect(() => {
+        let ignore = false;
+
+        fetch(`${apiUrl}/products/categories`)
+            .then(response => response.json())
+            .then(categories => {
+                // console.log('Categories: ', categories)
+                if(!ignore) {
+                    setCategories(categories)
+                }
+            })
+            // .catch(error => setError(error))
+            // .finally(() => setLoading(false));
+            return () => {
+                ignore = true;
+              };
+    }, []);
 
     return (
       <nav className="sticky top-0 bg-white z-[11] border-[1px] flex justify-between items-center mb-6 px-8 py-5 text-sm w-full">
@@ -27,55 +47,50 @@ function Navbar() {
                     Shopi
                 </NavLink>
             </li>
-            <li>
-                <NavLink
-                    to='/'
-                    className={({isActive}) =>
-                        isActive ? activeRouteStyle : undefined
-                    }
-                >
-                    Todas
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to='/ropa'
-                    className={({isActive}) =>
-                        isActive ? activeRouteStyle : undefined
-                    }
-                >
-                    Ropa
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to='/electronica'
-                    className={({isActive}) =>
-                        isActive ? activeRouteStyle : undefined
-                    }
-                >
-                    Electrónica
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to='/hogar'
-                    className={({isActive}) =>
-                        isActive ? activeRouteStyle : undefined
-                    }
-                >
-                    Hogar
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to='/otras'
-                    className={({isActive}) =>
-                        isActive ? activeRouteStyle : undefined
-                    }
-                >
-                    Otras
-                </NavLink>
+            <li
+                className="relative inline-block cursor-pointer categories-dropdown"
+            >
+                <button className="flex items-center gap-2 drop-btn">
+                    <span>Categorías</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
+                        <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
+                    </svg>
+                </button>
+                <div className="absolute hidden dropdown-content w-40 z-[1] bg-black rounded-lg text-white p-3">
+                    <ul>
+                        <li
+                            key='0'
+                            className="p-1"
+                        >
+                            <NavLink
+                                to='/'
+                                className={({isActive}) =>
+                                    `hover:underline ${isActive ? activeRouteStyle : undefined}`
+                                }
+                            >
+                                Todas
+                            </NavLink>
+                        </li>
+                        {
+                            categories.length > 0 &&
+                            categories.map((category: string, index) => (
+                                <li
+                                    key={index + 1}
+                                    className="p-1"
+                                >                    
+                                    <NavLink
+                                        to={`/categories/${category}`}
+                                        className={({isActive}) =>
+                                            `hover:underline ${isActive ? activeRouteStyle : undefined}`
+                                        }
+                                    >
+                                            {category}
+                                    </NavLink>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
             </li>
         </ul>
         <ul className="flex items-center gap-3">
@@ -125,4 +140,4 @@ function Navbar() {
     )
   }
   
-  export default Navbar
+  export default NavBar
